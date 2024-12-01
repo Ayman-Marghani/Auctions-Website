@@ -1,6 +1,6 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
-const cookie = require("cookie");
+const cookie = require("cookie")
 const app = express()
 const port = 4131
 
@@ -130,7 +130,7 @@ app.use((req, res, next) => {
   }
   next()
   // request information
-  console.log(`${req.method} ${req.url} ${res.statusCode}, Number of Listings: ${listings.length}`)
+  console.log(`${req.method} ${req.url} ${res.statusCode}`)
 })
 
 // Rate limiting setup
@@ -171,14 +171,14 @@ function checkBidData(bid) {
 
 // Functions
 function renderMainPage(req, res) {
-  res.render("mainpage.pug")
+  res.status(200).render("mainpage.pug")
 }
 
 function renderGalleryPage(req, res) {
   titleQuery = req.query.query
   catQuery = req.query.category
   
-  res.render("gallery.pug", {listings, titleQuery, catQuery})
+  res.status(200).render("gallery.pug", {listings, titleQuery, catQuery})
 }
 
 function renderListingPage(req, res) {
@@ -186,7 +186,7 @@ function renderListingPage(req, res) {
   if (!isNaN(id)) {
     for (listing of listings) {
       if (listing.id === parseInt(id)) {
-        res.render("listing.pug", {listing, bidder_name: req.cookies.bidder_name})
+        res.status(200).render("listing.pug", {listing, bidder_name: req.cookies.bidder_name})
         return
       }
     }
@@ -195,7 +195,7 @@ function renderListingPage(req, res) {
 }
 
 function renderCreateListingPage(req, res) {
-  res.render("create.pug")
+  res.status(200).render("create.pug")
 }
 
 function createNewListing(req, res) {
