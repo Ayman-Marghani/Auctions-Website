@@ -5,15 +5,15 @@ mixin listing(item)
     - link = "/listing/" + item.id
     td 
       a(href=link) #{item.title}
-    - bidsLength = item.bids.length
-    td= bidsLength
+    td= item.bids_len
     - cat = item.category.replace("-", " ")
     td #{cat}
     - const formatter = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'})
     - let amount = formatter.format(0)
-    - if (bidsLength !== 0) amount = formatter.format(item.bids[0].amount)
+    - if (item.max_bid !== []) amount = formatter.format(item.max_bid)
     td= amount 
-    td.sale-date-cell= item.end_date 
+    - sale_date = item.end_date.toLocaleDateString()
+    td.sale-date-cell= sale_date 
     td.end-date-cell
     td 
       button.delete-listing-btn(data-listing-id=item.id type="button") Delete
@@ -34,11 +34,7 @@ block content
         th.end-date-cell Auction Ends
         th
         each item in listings
-          - if (!titleQuery) result = true
-          - else {itemTitle = item.title.toLowerCase(); result = itemTitle.includes(titleQuery.toLowerCase())}
-          - result = result && (!catQuery || catQuery === "All-Categories" || catQuery === item.category)
-          if result
-            +listing(item)
+          +listing(item)
     .preview
       img.listing-img(src="" alt="")
       p.listing-desc

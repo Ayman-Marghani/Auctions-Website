@@ -33,7 +33,7 @@ async function addListing(data) {
   let parsed_sale_date = new Date();
   parsed_sale_date =  Date.parse(sale_date);
   // subtract from now date
-  const diff = sale_date - Date.now();
+  const diff = parsed_sale_date - Date.now();
   // Auction ended case
   if (diff <= 0) {
     return -1;
@@ -45,6 +45,8 @@ async function addListing(data) {
 // Input: id (int)
 // Output: true if deleted, false otherwise
 async function deleteListing(id) {
+  // Delete all bids associated with this listing
+  await deleteBids(id);
   const res = await connPool.awaitQuery("DELETE FROM auction WHERE id = ?", [id]);
   if (res.affectedRows === 0) {
     return false;
@@ -75,7 +77,7 @@ async function getListing(id) {
 }
 
 // Input: query, category | string, if null then put ""
-// Output: listings with max_bid key
+// Output: listings with max_bid and bids_len keys
 async function getGallery(query, category) {
   let listings = [];
   if (category === "All-Categories" || category === "") {
@@ -87,28 +89,27 @@ async function getGallery(query, category) {
   // add highest bid amount to each listing in the result
   for (let listing of listings) {
     listing.max_bid = await getHighestBid(listing.id);
+    listing.bids_len = await getBidsLen(listing.id);
   }
   return listings;
 }
 
 // Input: data object { listing_id, bidder, amount, comment }
-// Output: [status code, bids list]
+// Output: status code
 async function placeBid(data) {
   const { listing_id, bidder, amount, comment } = data;
   // Find the listing
   const [curListing, res] = await getListing(listing_id);
   // if listing is missing
   if (!res) {
-    return [404, []];
+    return 404;
   }
   // if bid amount is not bigger than the current top bid
   if (curListing.bids.length > 0 && amount <= curListing.bids[0].amount) {
-    return [409, curListing.bids];
+    return 409;
   }
-  // If all is good, Add the new bid to database
-  const query_res = await connPool.awaitQuery("INSERT INTO bid (listing_id, bidder, amount, comment) VALUES (?, ?, ?, ?);", [listing_id, bidder, amount, comment]);
-  const result_bids = await getBids(listing_id);
-  return [201, result_bids];
+  await connPool.awaitQuery("INSERT INTO bid (listing_id, bidder, amount, comment) VALUES (?, ?, ?, ?)", [listing_id, bidder, amount, comment]);
+  return 201;
 }
 
 async function getBids(listing_id) {
@@ -116,9 +117,19 @@ async function getBids(listing_id) {
   return bids;
 }
 
+// Helper functions
 async function getHighestBid(listing_id) {
   const res = await connPool.awaitQuery("SELECT MAX(amount) AS max FROM bid WHERE listing_id = ?", [listing_id]);
   return res[0].max;
+}
+
+async function getBidsLen(listing_id) {
+  const res = await connPool.awaitQuery("SELECT COUNT(*) AS count FROM bid WHERE listing_id = ?", [listing_id]);
+  return res[0].count;
+}
+
+async function deleteBids(listing_id) {
+  await connPool.awaitQuery("DELETE FROM bid WHERE listing_id = ?", [listing_id]);
 }
 
 module.exports = {
@@ -127,6 +138,5 @@ module.exports = {
     getListing,
     getGallery,
     placeBid,
-    getBids,
-    getHighestBid
+    getBids
 };
