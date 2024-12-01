@@ -6,13 +6,15 @@ const mysql = require(`mysql-await`); // npm install mysql-await
 var connPool = mysql.createPool({
   connectionLimit: 5, // it's a shared resource, let's not go nuts.
   host: "127.0.0.1",// this will work
-  user: "your username",
-  database: "your database",
-  password: "your password", // we really shouldn't be saving this here long-term -- and I probably shouldn't be sharing it with you...
+  user: "C4131F24U81",
+  database: "C4131F24U81",
+  password: "6611", // we really shouldn't be saving this here long-term -- and I probably shouldn't be sharing it with you...
 });
 
 // later you can use connPool.awaitQuery(query, data) -- it will return a promise for the query results.
-
+// Testing
+let res = await connPool.awaitQuery("select * from auction;");
+console.log(res)
 
 async function addListing(data) {
   // you CAN change the parameters for this function.
