@@ -1,0 +1,45 @@
+extends template.pug
+
+mixin bid(bid)
+  .bid 
+    div 
+      span.bidder #{bid.bidder}
+      - const formatter = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'})
+      - amount = formatter.format(bid.amount)
+      span.amount= amount
+    p.bid-comment #{bid.comment}
+
+block js_script
+  script(src="/js/bid.js" defer=true)
+
+block content
+  h1.listing-heading #{listing.title}
+  .listing-content
+    .listing-img-desc
+      img.listing-img(src=listing.img_url alt=listing.title)
+      p.listing-desc #{listing.description}
+    .bids-box 
+      .heading-btn-div
+        h2 Bids 
+        button.bid-btn(type="button") Place Bid
+      form.bid.bid-form(action="/api/place_bid" method="POST")
+        div 
+          p 
+            label(for="name") Your Name:
+            br
+            if bidder_name
+              input#name(type="text" name="name" value=bidder_name disabled=true)
+            else
+              input#name(type="text" name="name" required=true)
+          p 
+            label(for="amount") Amount:
+            br
+            input#amount(type="number" name="amount" min="50" step="0.01" required=true)
+        p
+          label(for="comment") Comment:
+          br
+          textarea#comment(name="comment" rows="2")
+        input.bid-form-btn.form-btn(type="submit" value="Submit")
+        input#listing_id(type="number" name="listing_id" value=listing.id style="display: none;")
+      each bid in listing.bids
+        +bid(bid) 

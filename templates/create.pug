@@ -1,0 +1,40 @@
+extends template.pug
+
+block js_script
+  script(src="/js/new_listing.js" defer=true)
+
+block content
+  h1 Add a Listing
+  form.create-form(action='/create' method='POST')
+    p
+      label(for='title') Title:
+      br
+      input#title(type='text' name='title' placeholder='Listing title' required=true)
+    p
+      label(for='img_url') Image URL:
+      br
+      input#img_url(type='url' name='img_url' placeholder='https://example.com/image.jpg' pattern='https://.*' required=true)
+    p
+      label(for='desc') Description:
+      br
+      textarea#desc(name='desc' rows='4' required=true)
+    p
+      label(for='create_category') Category:
+      br
+      select#create_category(name='create_category')
+        option(value='All-Categories') All Categories
+        option(value='Exotic-Cars') Exotic Cars
+        option(value='Antique-Sculptures') Antique Sculptures
+        option(value='Antique-Furniture') Antique Furniture
+        option(value='Luxury-Wearables') Luxury Wearables
+        option(value='other') Other
+    p.other-cat
+      label(for='other_category') Other Category:
+      br
+      input#other_category(type='text' name='other_category')
+    p
+      label(for='sale_date') Sale Date:
+      br
+      input#sale_date(type='date' name='sale_date' required=true)
+    p
+      input.create-btn.form-btn(type='submit' value='Submit')

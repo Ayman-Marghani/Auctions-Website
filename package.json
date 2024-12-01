@@ -1,0 +1,17 @@
+{
+  "name": "hw6",
+  "version": "1.0.0",
+  "description": "HW 6 of Internet Programming (CSCI 4131)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ayman Marghani",
+  "license": "ISC",
+  "dependencies": {
+    "cookie": "^0.5.0",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.1",
+    "pug": "^3.0.3"
+  }
+}

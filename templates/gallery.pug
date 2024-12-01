@@ -1,0 +1,44 @@
+extends template.pug
+
+mixin listing(item)
+  tr.listing-row(data-img-src=item.img_url data-img-alt=item.title data-desc=item.description)
+    - link = "/listing/" + item.id
+    td 
+      a(href=link) #{item.title}
+    - bidsLength = item.bids.length
+    td= bidsLength
+    - cat = item.category.replace("-", " ")
+    td #{cat}
+    - const formatter = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'})
+    - let amount = formatter.format(0)
+    - if (bidsLength !== 0) amount = formatter.format(item.bids[0].amount)
+    td= amount 
+    td.sale-date-cell= item.end_date 
+    td.end-date-cell
+    td 
+      button.delete-listing-btn(data-listing-id=item.id type="button") Delete
+
+
+block js_script
+  script(src="/js/table.js" defer=true)
+block content
+  h1.gallery-heading Gallery
+  .gallery-container
+    table 
+      tr 
+        th Listing 
+        th Number of Bids
+        th Category
+        th Top Bid
+        th Sale Date
+        th.end-date-cell Auction Ends
+        th
+        each item in listings
+          - if (!titleQuery) result = true
+          - else {itemTitle = item.title.toLowerCase(); result = itemTitle.includes(titleQuery.toLowerCase())}
+          - result = result && (!catQuery || catQuery === "All-Categories" || catQuery === item.category)
+          if result
+            +listing(item)
+    .preview
+      img.listing-img(src="" alt="")
+      p.listing-desc

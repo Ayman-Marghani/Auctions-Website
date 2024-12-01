@@ -1,0 +1,369 @@
+/* Font */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Prata&display=swap');
+
+/* General styles */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Prata', Futura, sans-serif;
+
+  background-color: #f1f5f9;
+  color: #023047;
+}
+
+input, select, textarea, button {
+  padding: 0.5rem 0.2rem;
+  font: inherit;
+}
+
+button, input, select, textarea {
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: #023047;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+h1 {
+  font-size: 4rem;
+  margin: 3rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+strong {
+  color: #0070c0;
+}
+
+em {
+  color: #D4AC0D;
+}
+
+.form-btn,
+button {
+  border: none;
+  padding: 0.5rem;
+
+  cursor: pointer;
+}
+/******************************************/
+/* Nav Bar */
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
+  
+  background-color: #2980B9;
+  
+  padding: 1rem 2rem;
+}
+
+nav li {
+  list-style-type: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links a {
+  font-weight: 800;
+
+  background-color: #85C1E9;
+
+  padding: 0.8rem;
+  border-radius: 5px;
+}
+
+.nav-links a:hover, 
+.search-btn:hover, 
+.delete-listing-btn:hover {
+  background-color: #aed6f1;
+}
+/******************************************/
+/* Search form */
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search-btn, 
+.delete-listing-btn {
+  color: #023047;
+  background-color: #85C1E9;
+}
+/******************************************/
+/* Main page banner */
+.banner {
+  font-size: 1.5rem;
+  text-align: center;
+
+  background-color: #d62828;
+  color: #fff;
+
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 0%); /* Source: https://medium.com/front-end-weekly/absolute-centering-in-css-ea3a9d0ad72e */
+}
+
+/* Main page headings */
+.main-page-secondary-heading {
+  font-style: italic;
+
+  margin: 2rem;
+
+  color: #D4AC0D;
+}
+
+/* Main page content */
+.main-page-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+
+  margin: 2rem 4rem;
+}
+
+.main-page-text,
+.main-page-content img {
+  border-radius: 5px;
+  flex-basis: 40%;
+}
+
+.main-page-text {
+  color: #000;
+  background-color: #fff;
+  padding: 2rem 1.5rem;
+}
+
+.main-page-text p,
+.main-page-text ul {
+  margin-bottom: 0.5rem;
+}
+
+.main-page-text li {
+  margin-left: 1.5rem;
+}
+
+/* link to gallery page */
+.main-page-text a {
+  font-weight: 800;
+  color: #2980B9;
+}
+/******************************************/
+/* Gallery page */
+.gallery-heading {
+  font-size: 3rem;
+  margin: 2rem;
+}
+
+.gallery-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.preview .listing-img {
+  height: 10rem;
+}
+
+.preview .listing-desc {
+  width: 18rem;
+  padding: 1rem;
+}
+
+table {
+  text-align: left;
+  flex-shrink: 0;
+}
+
+table tr:nth-child(odd) {
+  background-color: #2980B9;
+  color: #fff;
+}
+
+table tr:nth-child(even) {
+  background-color: #fff;
+}
+
+table th,
+table td {
+  padding: 1rem;
+}
+
+table th {
+  font-weight: 550;
+}
+
+table tr:nth-child(even) a {
+  color: #0070c0;
+}
+
+table tr:nth-child(odd) a {
+  color: #d6eaf8;
+}
+
+/* End date column */
+.end-date-cell {
+  width: 10rem;
+}
+/******************************************/
+/* Listing page */
+.listing-heading {
+  font-size: 3rem;
+  margin: 2rem;
+}
+
+.listing-content {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+
+  margin: 0 4rem;
+}
+
+/* Listing image and description */
+.listing-img {
+  display: block;
+  box-sizing: border-box;
+
+  height: 30rem;
+  width: auto;
+  max-width: 50rem;
+
+  margin: 0 auto;
+  margin-bottom: 1rem;
+
+  border-radius: 5px;
+  border: 0.2rem solid #D4AC0D;
+}
+
+.listing-desc {
+  background-color: #fff;
+
+  box-sizing: border-box;
+  width: 50rem; 
+
+  padding: 2rem;
+
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px lightgray;
+}
+
+/* Listing Bids */
+.heading-btn-div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1rem;
+  margin-bottom: 2rem;
+  
+  border-bottom: 0.2rem solid #023047;
+}
+
+.bid-btn, 
+.bid-form-btn {
+  color: #fff;
+  background-color: #2980B9;
+}
+
+.bid-btn {
+  padding: 1rem;
+}
+
+.bid-form {
+  display: none;
+}
+
+.bid-form div {
+  flex-wrap: wrap;
+}
+
+.bid-form-btn {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.bid {
+  background-color: #fff;
+
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px lightgray;
+}
+
+.bid div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  margin-bottom: 0.5rem;
+}
+
+.bidder,
+.bid-comment {
+  font-style: italic;
+}
+
+.bid-comment {
+  color: #85C1E9;
+}
+/******************************************/
+/* Add listing page */
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  margin: 0 auto;
+  max-width: fit-content;
+}
+
+.create-form input, 
+.create-form textarea, 
+.create-form select {
+  box-sizing: border-box;
+  width: 16rem;
+}
+
+.create-form label {
+  font-size: 1.1rem;
+}
+
+.other-cat {
+  display: none;
+}
+
+.create-btn {
+  color: #fff;
+  background-color: #2980B9;
+}
+
+.create-result {
+  font-size: 2rem;
+}

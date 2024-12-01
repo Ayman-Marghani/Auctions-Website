@@ -1,0 +1,27 @@
+doctype html 
+html(lang="en")
+  head 
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="/css/main.css")
+    block js_script
+    title Premier Auctions 
+  body 
+    nav 
+      ul.nav-links 
+        li 
+          a(href="/main") About Us
+        li 
+          a(href="/gallery") Gallery
+        li 
+          a(href="/create") Add Listing
+      form.search-form(action="/gallery" method="GET")
+        input#query(type="text" name="query")
+        select#category(name="category")
+          option(value="All-Categories") All Categories
+          option(value="Exotic-Cars") Exotic Cars
+          option(value="Antique-Sculptures") Antique Sculptures
+          option(value="Antique-Furniture") Antique Furniture
+          option(value="Luxury-Wearables") Luxury Wearables
+        input.search-btn.form-btn(type="submit" value="Search")
+    block content
