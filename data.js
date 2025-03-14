@@ -4,11 +4,11 @@ const mysql = require(`mysql-await`); // npm install mysql-await
 // first -- I want a connection pool: https://www.npmjs.com/package/mysql#pooling-connections
 // this is used a bit differently, but I think it's just better -- especially if server is doing heavy work.
 var connPool = mysql.createPool({
-  connectionLimit: 5, // it's a shared resource, let's not go nuts.
-  host: "127.0.0.1",// this will work
+  connectionLimit: 5, 
+  host: "127.0.0.1",
   user: "C4131F24U81",
   database: "C4131F24U81",
-  password: "6611", // we really shouldn't be saving this here long-term -- and I probably shouldn't be sharing it with you...
+  password: "", 
 });
 
 // Input: data object {title, image, description, category, other_category, sale_date}
