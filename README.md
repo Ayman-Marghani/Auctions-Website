@@ -21,13 +21,12 @@ This project is a web-based auction platform built with Express.js that allows u
 - CSS for styling
 ### Other:
 - Cookie-parser for session management
-- RESTful API architecture
 - SQL for database queries
 
 ## Database Schema
 The application uses two main tables:
 1. auction - Stores listing information including title, description, image, end date, etc.
-2. bid - Stores bid information including bidder name, amount, comment, and reference to the auction
+2. bid - Stores bid information, including bidder name, amount, comment, and reference to the auction
    
 ## API Endpoints
 - GET `/` - Main page
